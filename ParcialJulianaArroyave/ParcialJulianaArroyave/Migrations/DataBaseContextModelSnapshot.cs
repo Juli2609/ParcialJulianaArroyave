@@ -28,11 +28,12 @@ namespace ParcialJulianaArroyave.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("EntraceGate")
+                    b.Property<string>("EntranceGate")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<bool?>("IsUsed")
+                    b.Property<bool>("IsUsed")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("UseDate")
