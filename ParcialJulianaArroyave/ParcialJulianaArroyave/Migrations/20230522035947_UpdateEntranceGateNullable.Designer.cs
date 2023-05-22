@@ -12,8 +12,8 @@ using ParcialJulianaArroyave.DAL;
 namespace ParcialJulianaArroyave.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230522002727_NewDataBase")]
-    partial class NewDataBase
+    [Migration("20230522035947_UpdateEntranceGateNullable")]
+    partial class UpdateEntranceGateNullable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,11 +32,9 @@ namespace ParcialJulianaArroyave.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("EntranceGate")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsUsed")
+                    b.Property<bool?>("IsUsed")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("UseDate")

@@ -99,7 +99,7 @@ namespace ParcialJulianaArroyave.Controllers
             _context.Tickets.Remove(ticket);
             await _context.SaveChangesAsync();
 
-            return Ok(String.Format("El Ticket {0} fue eliminada!", ticket.Id));
+            return Ok(String.Format("El Ticket {0} fue eliminado!", ticket.Id));
         }
 
 

@@ -17,8 +17,8 @@ namespace ParcialJulianaArroyave.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UseDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsUsed = table.Column<bool>(type: "bit", nullable: false),
-                    EntranceGate = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
+                    IsUsed = table.Column<bool>(type: "bit", nullable: true),
+                    EntranceGate = table.Column<string>(type: "nvarchar(20)", nullable: true)
                 },
                 constraints: table =>
                 {

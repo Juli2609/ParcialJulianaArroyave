@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ParcialJulianaArroyave.DAL.Entities
 {
@@ -7,10 +9,7 @@ namespace ParcialJulianaArroyave.DAL.Entities
         [Key]
         public Guid Id { get; set; }
         public DateTime? UseDate { get; set; }
-        public bool IsUsed { get; set; }
-
-        [Display(Name = "Portería")]
-        [MaxLength(20)]
-        public string EntranceGate { get; set; }
+        public bool? IsUsed { get; set; }
+        public string? EntranceGate { get; set; }
     }
 }
