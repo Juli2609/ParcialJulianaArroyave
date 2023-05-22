@@ -15,6 +15,32 @@ namespace ParcialJulianaArroyave.Controllers
             _context = context;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ValidateTicket(Guid ticketId, string entranceGate)
+        {
+            // Verificar si existe una boleta con el ID proporcionado
+            var ticket = await _context.Tickets.FindAsync(ticketId);
+            if (ticket == null)
+            {
+                return Content("Boleta no válida");
+            }
+
+            if (ticket.IsUsed == true)
+            {
+                // La boleta ya fue usada
+                return Content($"Boleta ya usada. Fecha de uso: {ticket.UseDate}, Portería: {ticket.EntranceGate}");
+            }
+
+            // La boleta es válida y aún no ha sido usada
+            ticket.UseDate = DateTime.Now;
+            ticket.IsUsed = true;
+            ticket.EntranceGate = entranceGate;
+
+            await _context.SaveChangesAsync();
+
+            return Content("Boleta válida, puede ingresar al concierto");
+        }
+
         [HttpGet, ActionName("Get")]
         [Route("Get")]
         public async Task<ActionResult<IEnumerable<Ticket>>> GetTickets()
