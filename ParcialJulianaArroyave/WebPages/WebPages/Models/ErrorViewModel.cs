@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+
 namespace WebPages.Models
 {
     public class ErrorViewModel
@@ -5,5 +7,6 @@ namespace WebPages.Models
         public string? RequestId { get; set; }
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+
     }
 }

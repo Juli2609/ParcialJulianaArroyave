@@ -1,0 +1,31 @@
+﻿ 
+@model ParcialJulianaArroyave.DAL.Entities.Ticket
+
+<h4>Tickets</h4>
+<hr />
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Id)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Id)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.UseDate)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.UseDate)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.IsUsed)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.IsUsed)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.EntranceGate)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.EntranceGate)
+    </dd>
+</dl>
