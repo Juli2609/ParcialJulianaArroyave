@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "ValidateTicket";
+}
+
+<h4>Tickets</h4>
+<hr />
+
+@if (ViewData["Message"] != null)
+{
+    <h2>@ViewData["Message"]</h2>
+
+    @if (ViewData["UseDate"] != null && ViewData["EntranceGate"] != null)
+    {
+        <p>Fecha de uso: @ViewData["UseDate"]</p>
+        <p>Portería de ingreso: @ViewData["EntranceGate"]</p>
+    }
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post" asp-action="ValidateTicket">
+            <div class="form-group">
+                <label>ID de la Boleta:</label>
+                <input type="text" class="form-control" name="id" />
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-primary">Validar</button>
+            <br/>
+            <div class="form-group">
+                <a asp-action="Index" class="btn btn-outline-success">Regresar</a>
+            </div>
+        </form>
+    </div>
+</div>

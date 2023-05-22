@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using ParcialJulianaArroyave.DAL.Entities;
+using WebPages.Models;
 
 namespace WebPages.Controllers
 {
@@ -30,9 +31,67 @@ namespace WebPages.Controllers
                 return View("Error", ex);
             }
         }
-        //ValidateTicket
+        //ValidateTicket----------------------------------------------------
+        [HttpGet]
+        public IActionResult ValidateTicket()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ValidateTicket(Guid? id)
+        {
+            try
+            ''{
+                if (id == null)
+                {
+                    ViewData["Message"] = "Boleta no válida";
+                    return View();
+                }
+
+                var url = String.Format("{0}/{1}", _configuration["Api:TicketsUrl"], id);
+                var json = await _httpClient.CreateClient().GetStringAsync(url);
+                var ticket = JsonConvert.DeserializeObject<Ticket>(json);
+
+                if (ticket == null)
+                {
+                    ViewData["Message"] = "Boleta no válida";
+                }
+                else if (ticket.IsUsed == true)
+                {
+                    ViewData["Message"] = "Boleta ya usada";
+                    ViewData["UseDate"] = ticket.UseDate;
+                    ViewData["EntranceGate"] = ticket.EntranceGate;
+                }
+                else
+                {
+                    ViewData["Message"] = "Boleta válida, puede ingresar al concierto";
+                    ticket.UseDate = DateTime.Now; // Actualiza la fecha de uso a la fecha actual
+                    ticket.IsUsed = true; // Marca la boleta como usada
+
+                    var updateUrl = String.Format("{0}/{1}", _configuration["Api:TicketsEditUrl"], id);
+                    var response = await _httpClient.CreateClient().PutAsJsonAsync(updateUrl, ticket);
+
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        // Manejar el error en caso de que no se pueda actualizar la boleta
+                        ViewData["Message"] = "Error al actualizar la boleta";
+                    }
+                }
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return View("Error", ex);
+            }
+        }
 
 
+
+
+        //-----------------------------------------------------------------------
 
         [HttpGet]
         public async Task<IActionResult> Edit(Guid? id)
